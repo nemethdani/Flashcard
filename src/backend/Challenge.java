@@ -49,9 +49,8 @@ public class Challenge implements Comparable<Challenge> {
     }
 
 
-
     @Override
     public int compareTo(Challenge challenge) {
-        return 0;
+        return this.repetitionTime.compareTo(challenge.repetitionTime);
     }
 }
