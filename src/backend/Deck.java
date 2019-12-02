@@ -1,6 +1,6 @@
 package backend;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -56,5 +56,13 @@ public class Deck implements Serializable {
     }
     public void deleteCard(Card c){
         cardlist.remove(c);
+    }
+
+    public void serialize(File parent) throws IOException {
+        File f=new File(parent, name);
+        FileOutputStream fos=new FileOutputStream(f);
+        ObjectOutputStream ous=new ObjectOutputStream(fos);
+        ous.writeObject(this);
+        ous.close();
     }
 }
