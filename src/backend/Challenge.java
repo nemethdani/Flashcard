@@ -25,7 +25,7 @@ public class Challenge implements Comparable<Challenge> {
         easinessFactor=2.5;
         repetitionCount=0;
         repetitionInterval= initialRepetitionInterval;
-        repetitionTime=LocalDateTime.MIN;
+        repetitionTime=LocalDateTime.MAX; // A lejárt ismétlésű kártyák fontosabbak, mint az újak
     }
 
     public Boolean isDue(){
@@ -34,6 +34,7 @@ public class Challenge implements Comparable<Challenge> {
 
     public Set<Side> getChallenge(){return challenge;}
     public Set<Side> getResponse(){return response;}
+
     public LocalDateTime updateRepetitionTime(int grade){
         if(grade<0 || grade>5) throw new IllegalArgumentException("0<= grade <=5");
         if(grade<3){repetitionInterval=initialRepetitionInterval;}
