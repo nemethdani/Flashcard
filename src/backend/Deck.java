@@ -39,7 +39,7 @@ public class Deck implements Serializable {
         return count;
     }
     // tanulhatunk tovább is ha akarunk, nem csak a due elemeket
-    public Challenge getFirstChallenge(){
+    public Challenge getFirstChallenge() throws IndexOutOfBoundsException{
         if(cardlist.size()>0){
             orderIfNecessary();
             return cardlist.get(0).getFirstChallenge();
@@ -47,8 +47,12 @@ public class Deck implements Serializable {
         else throw new IndexOutOfBoundsException("deck üres");
     }
     public void learn(Challenge c, int grade){
-        c.updateRepetitionTime(grade);
-        ordered=false;
+        try {
+            c.updateRepetitionTime(grade);
+            ordered=false;
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
     }
     public void addCard(Card c){
         cardlist.add(c);

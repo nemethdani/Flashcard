@@ -24,23 +24,35 @@ public class Flashcard {
         return decks;
     }
 
-    public void loadDecks() throws IOException, ClassNotFoundException {
+    public void loadDecks()  {
 
         File[] deckFiles=programDir.listFiles();
         decks.clear();
         for (File df: deckFiles){
-            FileInputStream fis=new FileInputStream(df);
-            ObjectInputStream ois=new ObjectInputStream(fis);
+            try {
 
-            decks.add((Deck)ois.readObject());
-            ois.close();
+                FileInputStream fis=new FileInputStream(df);
+                ObjectInputStream ois=new ObjectInputStream(fis);
+
+                decks.add((Deck)ois.readObject());
+                ois.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
         }
 
     }
 
-    public void saveDecks() throws IOException {
+    public void saveDecks() {
         for(Deck d: decks){
-            d.serialize(programDir);
+            try {
+                d.serialize(programDir);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
