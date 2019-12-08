@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="swing.MainFrame">
+  <grid id="27dc6" binding="mainPanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="a8883" binding="deckList" layout-manager="BorderLayout" hgap="0" vgap="0">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="7574e" binding="decklistList" layout-manager="BorderLayout" hgap="0" vgap="0">
+            <constraints border-constraint="Center"/>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="cd3d3" binding="decklistItem" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints border-constraint="Center"/>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="8dbfe" class="javax.swing.JLabel" binding="deckNameValue">
+                    <constraints/>
+                    <properties>
+                      <text value="deckname"/>
+                    </properties>
+                  </component>
+                  <component id="a0813" class="javax.swing.JLabel" binding="duevalue">
+                    <constraints/>
+                    <properties>
+                      <text value="duevalue"/>
+                    </properties>
+                  </component>
+                  <component id="aff0f" class="javax.swing.JButton" binding="learn">
+                    <constraints/>
+                    <properties>
+                      <text value="Learn"/>
+                    </properties>
+                  </component>
+                  <component id="c7ae3" class="javax.swing.JButton" binding="edit">
+                    <constraints/>
+                    <properties>
+                      <text value="Edit"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
