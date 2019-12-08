@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Deck implements Serializable {
+public class Deck implements Serializable, Comparable {
     private List<Card> cardlist;
     private String name;
     private boolean ordered;
@@ -69,4 +69,16 @@ public class Deck implements Serializable {
         ous.writeObject(this);
         ous.close();
     }
+
+
+
+    @Override
+    public int compareTo(Object d) {
+        return name.compareTo(((Deck) d).name);
+    }
 }
+
+
+
+
+

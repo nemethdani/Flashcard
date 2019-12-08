@@ -20,6 +20,8 @@ public class Flashcard {
         programDir.mkdir();
     }
 
+    public void addDeck(Deck d){decks.add(d);}
+
     public Set<Deck> getDecks() {
         return decks;
     }
