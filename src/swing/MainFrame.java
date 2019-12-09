@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Set;
 
 public class MainFrame extends JFrame {
@@ -42,7 +44,13 @@ public class MainFrame extends JFrame {
 
     public MainFrame(String title) {
         super(title);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                fc.saveDecks();
+                System.exit(0);
+            }
+        });
         this.setContentPane(mainPanel);
         this.setMinimumSize(new Dimension(400,100));
 
