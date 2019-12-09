@@ -24,6 +24,12 @@ public class MainFrame extends JFrame {
 
     private Flashcard fc;
 
+    public void refresh(){
+        setDeckList();
+        decklistList.revalidate();
+        decklistList.repaint();
+    }
+
     class newDeckButtonActionListener implements ActionListener {
 
         public newDeckButtonActionListener(){};
@@ -33,14 +39,14 @@ public class MainFrame extends JFrame {
                 System.out.println("new deck clicked");
                 fc.addDeck(new Deck("New deck"));
 
-                setDeckList();
-                decklistList.revalidate();
-                decklistList.repaint();
+                refresh();
 
             }
         }
 
     }
+
+    private MainFrame getThis(){return this;}
 
     class editDeckButtonActionListener implements ActionListener {
 
@@ -50,7 +56,7 @@ public class MainFrame extends JFrame {
 
         public void actionPerformed(ActionEvent ae){
             if (ae.getActionCommand().equals("editDeck")) {
-                DeckFrame df=new DeckFrame(d);
+                DeckFrame df=new DeckFrame(d.getName(), d, getThis());
                 df.setVisible(true);
 
             }
@@ -77,14 +83,17 @@ public class MainFrame extends JFrame {
         Set<Deck> decks=fc.getDecks();
         for(Deck d: decks){
             JPanel decklistItem = new JPanel();
-            decklistItem.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+            decklistItem.setLayout(new BoxLayout(decklistItem, BoxLayout.X_AXIS));
             decklistList.add(decklistItem, BorderLayout.CENTER);
             deckNameValue = new JLabel();
             deckNameValue.setText(d.getName());
             decklistItem.add(deckNameValue);
+            decklistItem.add(Box.createHorizontalGlue());
             duevalue = new JLabel();
             duevalue.setText(Integer.toString(d.getNumberOfDue()));
             decklistItem.add(duevalue);
+            decklistItem.add(Box.createRigidArea(new Dimension(20,0)));
+
             learn = new JButton();
             learn.setText("Learn");
             decklistItem.add(learn);
@@ -94,6 +103,7 @@ public class MainFrame extends JFrame {
             ActionListener al_edit=new editDeckButtonActionListener(d);
             edit.addActionListener(al_edit);
             decklistItem.add(edit);
+            decklistList.add(decklistItem);
         }
     }
 
@@ -129,7 +139,7 @@ public class MainFrame extends JFrame {
         mainPanel.add(newDeck, BorderLayout.SOUTH);
 
         decklistList = new JPanel();
-        decklistList.setLayout(new BorderLayout(0, 0));
+        decklistList.setLayout(new BoxLayout(decklistList, BoxLayout.Y_AXIS));
         deckList.add(decklistList, BorderLayout.CENTER);
 
 

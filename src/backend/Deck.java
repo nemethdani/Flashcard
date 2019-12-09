@@ -27,6 +27,7 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
     }
 
     public String getName(){return name;}
+    public void setName(String newname){this.name=newname;}
     public int getNumberOfDue(){
         orderIfNecessary();
         Iterator it=cardlist.iterator();

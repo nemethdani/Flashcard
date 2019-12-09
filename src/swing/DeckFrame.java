@@ -4,6 +4,8 @@ import backend.Deck;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class DeckFrame extends JFrame {
     private JTextField deckName;
@@ -15,10 +17,23 @@ public class DeckFrame extends JFrame {
     private JButton deleteCard;
 
     private Deck data;
+    private MainFrame main;
 
-    public DeckFrame(Deck data){
+    public DeckFrame(String title, Deck data, MainFrame main){
+        super(title);
+        this.main=main;
         this.data=data;
         this.setMinimumSize(new Dimension(400,100));
+
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                data.setName(deckName.getText());
+                main.refresh();
+                dispose();
+
+            }
+        });
 
         deckName=new JTextField(data.getName());
         add(deckName, BorderLayout.NORTH);
