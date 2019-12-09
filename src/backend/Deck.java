@@ -1,15 +1,17 @@
 package backend;
 
+import javax.swing.table.AbstractTableModel;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-public class Deck implements Serializable, Comparable {
+public class Deck extends AbstractTableModel implements Serializable, Comparable {
     private List<Card> cardlist;
     private String name;
     private boolean ordered;
+    private int numberOfSides=2;
 
     private void orderIfNecessary(){
         if(!ordered){
@@ -75,6 +77,21 @@ public class Deck implements Serializable, Comparable {
     @Override
     public int compareTo(Object d) {
         return name.compareTo(((Deck) d).name);
+    }
+
+    @Override
+    public int getRowCount() {
+        return cardlist.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        return numberOfSides;
+    }
+
+    @Override
+    public Object getValueAt(int i, int i1) {
+        return cardlist.get(i).getSide(i1).getInformation();
     }
 }
 

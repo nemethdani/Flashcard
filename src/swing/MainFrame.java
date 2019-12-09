@@ -42,6 +42,22 @@ public class MainFrame extends JFrame {
 
     }
 
+    class editDeckButtonActionListener implements ActionListener {
+
+        private Deck d;
+
+        public editDeckButtonActionListener(Deck d){this.d=d;};
+
+        public void actionPerformed(ActionEvent ae){
+            if (ae.getActionCommand().equals("editDeck")) {
+                DeckFrame df=new DeckFrame(d);
+                df.setVisible(true);
+
+            }
+        }
+
+    }
+
     public MainFrame(String title) {
         super(title);
         this.addWindowListener(new WindowAdapter() {
@@ -74,6 +90,9 @@ public class MainFrame extends JFrame {
             decklistItem.add(learn);
             edit = new JButton();
             edit.setText("Edit");
+            edit.setActionCommand("editDeck");
+            ActionListener al_edit=new editDeckButtonActionListener(d);
+            edit.addActionListener(al_edit);
             decklistItem.add(edit);
         }
     }
