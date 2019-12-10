@@ -13,6 +13,7 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
     private boolean ordered;
     private int numberOfSides=2;
 
+
     private void orderIfNecessary(){
         if(!ordered){
             Collections.sort(cardlist);

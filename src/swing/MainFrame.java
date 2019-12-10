@@ -99,7 +99,7 @@ public class MainFrame extends JFrame {
 
         public void actionPerformed(ActionEvent ae){
             if (ae.getActionCommand().equals("editDeck")) {
-                DeckFrame df=new DeckFrame(d.getName(), d, getThis());
+                DeckFrame df=new DeckFrame(d.getName(), d,fc, getThis());
                 df.setVisible(true);
 
             }

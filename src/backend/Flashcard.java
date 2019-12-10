@@ -49,6 +49,10 @@ public class Flashcard {
     }
 
     public void saveDecks() {
+        File[] deckFiles=programDir.listFiles();
+        for(File df:deckFiles){
+            df.delete();
+        }
         for(Deck d: decks){
             try {
                 d.serialize(programDir);

@@ -1,6 +1,7 @@
 package swing;
 
 import backend.Deck;
+import backend.Flashcard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,17 +19,21 @@ public class DeckFrame extends JFrame {
 
     private Deck data;
     private MainFrame main;
+    private Flashcard fc;
 
-    public DeckFrame(String title, Deck data, MainFrame main){
+    public DeckFrame(String title, Deck data, Flashcard fc,  MainFrame main){
         super(title);
         this.main=main;
         this.data=data;
         this.setMinimumSize(new Dimension(400,100));
+        this.fc=fc;
 
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                fc.getDecks().remove(data);
                 data.setName(deckName.getText());
+                fc.getDecks().add(data);
                 main.refresh();
                 dispose();
 
