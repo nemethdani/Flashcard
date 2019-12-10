@@ -55,6 +55,18 @@ public class DeckFrame extends JFrame {
         }
     }
 
+    class deleteCardButtonActionListener implements ActionListener {
+        public deleteCardButtonActionListener(){};
+        public void actionPerformed(ActionEvent ae){
+            if (ae.getActionCommand().equals("deleteCard")) {
+                int selectedRow=decksTable.getSelectedRow();
+                Card selectedCard=data.getCardByRow(selectedRow);
+                data.deleteCard(selectedCard);
+                refresh();
+            }
+        }
+    }
+
     public DeckFrame(String title, Deck data, Flashcard fc,  MainFrame main){
         super(title);
         this.main=main;
@@ -97,6 +109,8 @@ public class DeckFrame extends JFrame {
 
         deleteCard=new JButton("Delete card");
         buttons.add(deleteCard);
+        deleteCard.setActionCommand("deleteCard");
+        deleteCard.addActionListener(new deleteCardButtonActionListener());
 
 
 
