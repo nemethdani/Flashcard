@@ -43,6 +43,18 @@ public class DeckFrame extends JFrame {
         }
     }
 
+    class editCardButtonActionListener implements ActionListener {
+        public editCardButtonActionListener(){};
+        public void actionPerformed(ActionEvent ae){
+            if (ae.getActionCommand().equals("editCard")) {
+                int selectedRow=decksTable.getSelectedRow();
+                Card selectedCard=data.getCardByRow(selectedRow);
+                EditCardFrame ecf=new EditCardFrame(selectedCard, fc, false, data, getThis());
+                ecf.setVisible(true);
+            }
+        }
+    }
+
     public DeckFrame(String title, Deck data, Flashcard fc,  MainFrame main){
         super(title);
         this.main=main;
@@ -80,6 +92,8 @@ public class DeckFrame extends JFrame {
 
         editCard=new JButton("Edit card");
         buttons.add(editCard);
+        editCard.addActionListener(new editCardButtonActionListener());
+        editCard.setActionCommand("editCard");
 
         deleteCard=new JButton("Delete card");
         buttons.add(deleteCard);

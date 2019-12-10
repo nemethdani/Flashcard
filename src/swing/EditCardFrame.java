@@ -80,7 +80,7 @@ public class EditCardFrame extends JFrame{
         info1=new JTextField();
         if(card.getNumberOfSides()>=1) info1.setText((String)card.getSide(0).getInformation().getInformation());
         info2=new JTextField();
-        if(card.getNumberOfSides()>=2) info1.setText((String)card.getSide(1).getInformation().getInformation());
+        if(card.getNumberOfSides()>=2) info2.setText((String)card.getSide(1).getInformation().getInformation());
         deckLabel=new JLabel("Deck:");
         decks=new JComboBox<String>(flashcard.getDeckNames());
         decks.setSelectedItem(sourceDeck.getName());

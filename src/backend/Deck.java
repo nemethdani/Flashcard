@@ -74,6 +74,8 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
         ous.close();
     }
 
+    public Card getCardByRow(int i){return cardlist.get(i);}
+
 
 
     @Override
