@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Vector;
 
 public class Flashcard {
     private Set<Deck> decks;
@@ -24,6 +26,15 @@ public class Flashcard {
 
     public Set<Deck> getDecks() {
         return decks;
+    }
+    public Vector<String> getDeckNames(){
+        Vector<String> decknames=new Vector<String>();
+        for(Deck d:decks){
+            decknames.add(d.getName());
+        }
+        return decknames;
+
+
     }
 
     public void loadDecks()  {

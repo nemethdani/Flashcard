@@ -1,12 +1,17 @@
 package swing;
 
+import backend.Card;
 import backend.Deck;
 import backend.Flashcard;
+import backend.Side;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 public class DeckFrame extends JFrame {
     private JTextField deckName;
@@ -20,6 +25,22 @@ public class DeckFrame extends JFrame {
     private Deck data;
     private MainFrame main;
     private Flashcard fc;
+
+    class newCardButtonActionListener implements ActionListener {
+
+
+
+        public newCardButtonActionListener(){};
+
+        public void actionPerformed(ActionEvent ae){
+            if (ae.getActionCommand().equals("newCard")) {
+                EditCardFrame ecf=new EditCardFrame(new Card(new ArrayList<Side>()), fc);
+                ecf.setVisible(true);
+
+            }
+        }
+
+    }
 
     public DeckFrame(String title, Deck data, Flashcard fc,  MainFrame main){
         super(title);
@@ -53,6 +74,8 @@ public class DeckFrame extends JFrame {
 
         newCard=new JButton("New card");
         buttons.add(newCard);
+        newCard.addActionListener(new newCardButtonActionListener());
+        newCard.setActionCommand("newCard");
 
         editCard=new JButton("Edit card");
         buttons.add(editCard);

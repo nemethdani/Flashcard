@@ -27,6 +27,7 @@ public class Card implements Comparable<Card>{
 
     public Challenge getFirstChallenge(){return challenges.first();}
     public Side getSide(int i){return sides.get(i);}
+    public int getNumberOfSides(){return sides.size();}
 
 
     @Override
