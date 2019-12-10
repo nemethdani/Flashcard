@@ -8,6 +8,7 @@ public class Card implements Comparable<Card>{
 
     public Card(List<Side> sides){
         this.sides=sides;
+        challenges=new TreeSet<Challenge>();
         for(Side s: sides){
             Set<Side> ch=new TreeSet<Side>();
             ch.add(s);

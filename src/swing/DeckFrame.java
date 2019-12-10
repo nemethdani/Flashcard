@@ -26,20 +26,21 @@ public class DeckFrame extends JFrame {
     private MainFrame main;
     private Flashcard fc;
 
+    public void refresh(){
+        decksTable.revalidate();
+        decksTable.repaint();
+    }
+
+    private DeckFrame getThis(){return this;}
+
     class newCardButtonActionListener implements ActionListener {
-
-
-
         public newCardButtonActionListener(){};
-
         public void actionPerformed(ActionEvent ae){
             if (ae.getActionCommand().equals("newCard")) {
-                EditCardFrame ecf=new EditCardFrame(new Card(new ArrayList<Side>()), fc);
+                EditCardFrame ecf=new EditCardFrame(new Card(new ArrayList<Side>()), fc, true, data, getThis());
                 ecf.setVisible(true);
-
             }
         }
-
     }
 
     public DeckFrame(String title, Deck data, Flashcard fc,  MainFrame main){

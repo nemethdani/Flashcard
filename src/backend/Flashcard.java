@@ -36,6 +36,9 @@ public class Flashcard {
 
 
     }
+    public Deck getDeckByName(String deckName){
+        return ((TreeSet<Deck>)decks).floor(new Deck(deckName));
+    }
 
     public void loadDecks()  {
 
