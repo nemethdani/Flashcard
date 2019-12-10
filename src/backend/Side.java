@@ -1,6 +1,8 @@
 package backend;
 
-public class Side implements Comparable<Side>{
+import java.io.Serializable;
+
+public class Side implements Comparable<Side>, Serializable {
     private Information information;
     public Side(Information information){
         this.information=information;

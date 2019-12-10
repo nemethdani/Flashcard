@@ -93,7 +93,7 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
 
     @Override
     public Object getValueAt(int i, int i1) {
-        return cardlist.get(i).getSide(i1).getInformation();
+        return cardlist.get(i).getSide(i1).getInformation().getInformation();
     }
 }
 

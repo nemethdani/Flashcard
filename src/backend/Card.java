@@ -1,8 +1,9 @@
 package backend;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Card implements Comparable<Card>{
+public class Card implements Comparable<Card>, Serializable {
     private List<Side> sides;
     private SortedSet<Challenge> challenges;
 

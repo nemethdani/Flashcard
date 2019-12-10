@@ -1,10 +1,11 @@
 package backend;
 
+import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class Challenge implements Comparable<Challenge> {
+public class Challenge implements Comparable<Challenge>, Serializable {
 
     //ezt az értéket sosem használjuk, csak  a szorzatát
     static private Duration initialRepetitionInterval=Duration.ofSeconds(12);
