@@ -48,9 +48,12 @@ public class DeckFrame extends JFrame {
         public void actionPerformed(ActionEvent ae){
             if (ae.getActionCommand().equals("editCard")) {
                 int selectedRow=decksTable.getSelectedRow();
-                Card selectedCard=data.getCardByRow(selectedRow);
-                EditCardFrame ecf=new EditCardFrame(selectedCard, fc, false, data, getThis());
-                ecf.setVisible(true);
+                if(selectedRow>=0){
+                    Card selectedCard=data.getCardByRow(selectedRow);
+                    EditCardFrame ecf=new EditCardFrame(selectedCard, fc, false, data, getThis());
+                    ecf.setVisible(true);
+                }
+
             }
         }
     }
@@ -60,9 +63,12 @@ public class DeckFrame extends JFrame {
         public void actionPerformed(ActionEvent ae){
             if (ae.getActionCommand().equals("deleteCard")) {
                 int selectedRow=decksTable.getSelectedRow();
-                Card selectedCard=data.getCardByRow(selectedRow);
-                data.deleteCard(selectedCard);
-                refresh();
+                if(selectedRow>=0){
+                    Card selectedCard=data.getCardByRow(selectedRow);
+                    data.deleteCard(selectedCard);
+                    refresh();
+                }
+
             }
         }
     }
