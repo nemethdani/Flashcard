@@ -97,6 +97,22 @@ public class MainFrame extends JFrame {
 
     }
 
+    class learnDeckButtonActionListener implements ActionListener {
+
+        private Deck d;
+
+        public learnDeckButtonActionListener(Deck d){this.d=d;};
+
+        public void actionPerformed(ActionEvent ae){
+            if (ae.getActionCommand().equals("learnDeck")) {
+                LearnFrame lf=new LearnFrame(d, getThis());
+                lf.setVisible(true);
+
+            }
+        }
+
+    }
+
 
 
     private void setDeckList(){
@@ -120,6 +136,8 @@ public class MainFrame extends JFrame {
 
             JButton learn = new JButton();
             learn.setText("Learn");
+            learn.setActionCommand("learnDeck");
+            learn.addActionListener(new learnDeckButtonActionListener(d));
             decklistItem.add(learn);
 
             JButton edit = new JButton();
