@@ -28,6 +28,19 @@ public class EditCardFrame extends JFrame{
     private JButton save;
     private JPanel commands;
 
+    private EditCardFrame getThis(){return this;}
+
+    class cancelCardButtonActionListener implements ActionListener{
+        public cancelCardButtonActionListener(){};
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if(ae.getActionCommand().equals("cancelCard")){
+                dispose();
+            }
+        }
+    }
+
     class saveCardButtonActionListener implements ActionListener {
         public saveCardButtonActionListener(){};
         public void actionPerformed(ActionEvent ae){
@@ -98,6 +111,8 @@ public class EditCardFrame extends JFrame{
 
         delete=new JButton("Delete card");
         cancel=new JButton("Cancel");
+        cancel.addActionListener(new cancelCardButtonActionListener());
+        cancel.setActionCommand("cancelCard");
         save=new JButton("save");
         save.setActionCommand("saveCard");
         save.addActionListener(new saveCardButtonActionListener());
