@@ -2,6 +2,7 @@ package backend;
 
 import javax.swing.table.AbstractTableModel;
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -46,7 +47,22 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
     public Challenge getFirstChallenge() throws IndexOutOfBoundsException{
         if(cardlist.size()>0){
             orderIfNecessary();
-            return cardlist.get(0).getFirstChallenge();
+            if(getNumberOfDue()>0){
+                return cardlist.get(0).getFirstChallenge();
+            }
+            else{
+                //ha utolsó card utolsó ch-e még nem tanult
+                Card lastCard=cardlist.get(cardlist.size()-1);
+                Challenge lastChallenge=lastCard.getLastChallenge();
+                LocalDateTime lastRep=lastChallenge.getRepetitionTime();
+                if(lastRep.equals(LocalDateTime.MAX)){
+                    return cardlist.get(cardlist.size()-1).getLastChallenge();
+                }
+                else{
+                    // összes card közül az első
+                    return cardlist.get(0).getFirstChallenge();
+                }
+            }
         }
         else throw new IndexOutOfBoundsException("deck üres");
     }

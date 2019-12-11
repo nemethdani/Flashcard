@@ -46,7 +46,7 @@ public class LearnFrame extends JFrame{
         public gradeButtonActionListener(int grade){this.grade=grade;};
         public void actionPerformed(ActionEvent ae){
             if (ae.getActionCommand().equals("grade")) {
-                deck.getFirstChallenge().updateRepetitionTime(grade);
+                deck.learn(deck.getFirstChallenge(), grade);
                 mainFrame.refresh();
                 challenges.removeAll();
                 responses.removeAll();
@@ -103,14 +103,14 @@ public class LearnFrame extends JFrame{
         grade2.setActionCommand("grade");
         grade2.addActionListener(new gradeButtonActionListener(2));
         grade3=new JButton("3");
-        grade2.setActionCommand("grade");
-        grade2.addActionListener(new gradeButtonActionListener(3));
+        grade3.setActionCommand("grade");
+        grade3.addActionListener(new gradeButtonActionListener(3));
         grade4=new JButton("4");
-        grade2.setActionCommand("grade");
-        grade2.addActionListener(new gradeButtonActionListener(4));
+        grade4.setActionCommand("grade");
+        grade4.addActionListener(new gradeButtonActionListener(4));
         grade5=new JButton("5");
-        grade2.setActionCommand("grade");
-        grade2.addActionListener(new gradeButtonActionListener(5));
+        grade5.setActionCommand("grade");
+        grade5.addActionListener(new gradeButtonActionListener(5));
         grading=new JPanel();
         grading.add(gradeLabel);
         grading.add(grade2);

@@ -28,6 +28,7 @@ public class Card implements Comparable<Card>, Serializable {
     }
 
     public Challenge getFirstChallenge(){return challenges.first();}
+    public Challenge getLastChallenge(){return challenges.last();}
     public Side getSide(int i){return sides.get(i);}
     public int getNumberOfSides(){return sides.size();}
 
