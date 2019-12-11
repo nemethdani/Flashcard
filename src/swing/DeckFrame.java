@@ -87,6 +87,7 @@ public class DeckFrame extends JFrame {
                 data.setName(deckName.getText());
                 fc.getDecks().add(data);
                 main.refresh();
+                main.removeDeckFrame(getThis());
                 dispose();
 
             }
