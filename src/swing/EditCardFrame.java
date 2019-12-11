@@ -41,6 +41,24 @@ public class EditCardFrame extends JFrame{
         }
     }
 
+    class deleteCardButtonActionListener implements ActionListener{
+        public deleteCardButtonActionListener(){};
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            if(ae.getActionCommand().equals("deleteCard")){
+                if(isNew){
+                    dispose();
+                }
+                else{
+                    sourceDeck.deleteCard(card);
+                    deckFrame.refresh();
+                    dispose();
+                }
+            }
+        }
+    }
+
     class saveCardButtonActionListener implements ActionListener {
         public saveCardButtonActionListener(){};
         public void actionPerformed(ActionEvent ae){
@@ -70,6 +88,8 @@ public class EditCardFrame extends JFrame{
                     sourceDeck.deleteCard(card);
                     targetDeck.addCard(card);
                 }
+                isNew=false;
+                sourceDeck=targetDeck;
                 deckFrame.refresh();
             }
 
@@ -110,6 +130,8 @@ public class EditCardFrame extends JFrame{
         this.add(settings, BorderLayout.CENTER);
 
         delete=new JButton("Delete card");
+        delete.addActionListener(new deleteCardButtonActionListener());
+        delete.setActionCommand("deleteCard");
         cancel=new JButton("Cancel");
         cancel.addActionListener(new cancelCardButtonActionListener());
         cancel.setActionCommand("cancelCard");
