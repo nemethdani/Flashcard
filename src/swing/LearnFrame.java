@@ -9,10 +9,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Set;
 
-public class LearnFrame extends JFrame{
+public class LearnFrame extends JFrame implements KeyListener{
     private Deck deck;
     private MainFrame mainFrame;
 
@@ -41,18 +43,56 @@ public class LearnFrame extends JFrame{
         }
     }
 
+    private void gradeChallenge(int grade){
+        deck.learn(deck.getFirstChallenge(), grade);
+        mainFrame.refresh();
+        challenges.removeAll();
+        responses.removeAll();
+        generateChallenges();
+    }
+
     class gradeButtonActionListener implements ActionListener {
         private int grade;
         public gradeButtonActionListener(int grade){this.grade=grade;};
         public void actionPerformed(ActionEvent ae){
             if (ae.getActionCommand().equals("grade")) {
-                deck.learn(deck.getFirstChallenge(), grade);
-                mainFrame.refresh();
-                challenges.removeAll();
-                responses.removeAll();
-                generateChallenges();
+                gradeChallenge(grade);
 
             }
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        System.err.println("pressed: "+ keyEvent);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+        int key =keyEvent.getKeyCode();
+        System.err.println(key);
+        switch (key){
+            case KeyEvent.VK_SPACE:{
+                generateResponses();break;
+            }
+            case KeyEvent.VK_NUMPAD2:{
+                gradeChallenge(2);break;
+            }
+            case KeyEvent.VK_NUMPAD3:{
+                gradeChallenge(3);break;
+            }
+            case KeyEvent.VK_NUMPAD4:{
+                gradeChallenge(4);break;
+            }
+            case KeyEvent.VK_NUMPAD5:{
+                gradeChallenge(5);break;
+            }
+            default:{break;}
         }
     }
 
@@ -83,6 +123,8 @@ public class LearnFrame extends JFrame{
 
         this.deck=deck;
         this.mainFrame=mainFrame;
+        this.addKeyListener(this);
+        this.setFocusable(true);
 
         challenges=new JPanel();
         challenges.setLayout(new BoxLayout(challenges, BoxLayout.Y_AXIS));
