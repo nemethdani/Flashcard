@@ -90,11 +90,14 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
 
     @Override
     public int getColumnCount() {
-        return numberOfSides;
+        return numberOfSides+1;
     }
 
     @Override
     public Object getValueAt(int i, int i1) {
+        if(i1>=2){
+            return cardlist.get(i).getFirstChallenge().getRepetitionTime();
+        }
         return cardlist.get(i).getSide(i1).getInformation().getInformation();
     }
 }

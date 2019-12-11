@@ -35,6 +35,7 @@ public class Challenge implements Comparable<Challenge>, Serializable {
 
     public Set<Side> getChallenge(){return challenge;}
     public Set<Side> getResponse(){return response;}
+    public LocalDateTime getRepetitionTime(){return repetitionTime;}
 
     public LocalDateTime updateRepetitionTime(int grade) throws IllegalArgumentException{
         if(grade<0 || grade>5) throw new IllegalArgumentException("0<= grade <=5");
