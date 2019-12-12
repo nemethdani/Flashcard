@@ -65,6 +65,7 @@ public class MainFrame extends JFrame {
         this.add(buttons, BorderLayout.SOUTH);
 
         setDeckList();
+        pack();
 
 
     }
@@ -75,6 +76,7 @@ public class MainFrame extends JFrame {
     public void refresh(){
         remove(deckList);
         setDeckList();
+        pack();
         revalidate();
         repaint();
         for(DeckFrame df: deckFrames){

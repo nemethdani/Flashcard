@@ -10,7 +10,7 @@ public abstract class Information implements Serializable {
 
     /***
      * visszadja az absztrakt infó típusát
-     * @return
+     * @return a tárolt infó osztálya
      */
     public Class getType(){return type;}
 

@@ -132,7 +132,7 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
     /***
      * Serializálja a Deck-et
      * @param parent A célmappa
-     * @throws IOException
+     * @throws IOException ha nem sikerült serializálni
      */
     public void serialize(File parent) throws IOException {
         File f=new File(parent, name);

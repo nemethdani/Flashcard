@@ -145,7 +145,7 @@ public class DeckFrame extends JFrame {
         deleteCard.setActionCommand("deleteCard");
         deleteCard.addActionListener(new deleteCardButtonActionListener());
 
-
+        pack();
 
     }
 }

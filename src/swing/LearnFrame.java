@@ -44,6 +44,7 @@ public class LearnFrame extends JFrame implements KeyListener{
         public void actionPerformed(ActionEvent ae){
             if (ae.getActionCommand().equals("showAnswer")) {
                 generateResponses();
+                pack();
 
             }
         }
@@ -200,6 +201,7 @@ public class LearnFrame extends JFrame implements KeyListener{
 
         generateChallenges();
 
+        pack();
 
     }
 

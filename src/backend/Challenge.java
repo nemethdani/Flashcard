@@ -40,7 +40,7 @@ public class Challenge implements Comparable<Challenge>, Serializable {
 
     /***
      * Ismételni kell-e már a Challenge-et
-     * @return Igaz, ha repetitionTime<now()
+     * @return Igaz, ha repetitionTime kisebb mint now()
      */
     public Boolean isDue(){
         return repetitionTime.isBefore(LocalDateTime.now());
@@ -66,7 +66,7 @@ public class Challenge implements Comparable<Challenge>, Serializable {
 
     /***
      * Frissíti a repetitionTime-ot a megadott parmaéter alapján módosított SM-2 algoritmussal
-     * @param grade Mennyire sikerült eltalálni a választ: 0<=grade<=5
+     * @param grade Mennyire sikerült eltalálni a választ: 0 kisebb egynelő grade kisebb egyenlő 5
      * @return  A következő ismétlés ideje
      * @throws IllegalArgumentException Ha nem [0;5] intervallumban adjuk a paramétert meg
      */

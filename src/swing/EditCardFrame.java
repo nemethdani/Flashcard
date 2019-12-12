@@ -168,7 +168,7 @@ public class EditCardFrame extends JFrame{
         commands.add(save);
         this.add(commands, BorderLayout.SOUTH);
 
-
+        pack();
 
 
 
