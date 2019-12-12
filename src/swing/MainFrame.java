@@ -15,6 +15,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
+/***
+ * Program főablaka, kezeli a backendet
+ */
 public class MainFrame extends JFrame {
 
     private JPanel deckList;
@@ -26,7 +29,10 @@ public class MainFrame extends JFrame {
     private Set<DeckFrame> deckFrames;
 
 
-
+    /***
+     * Létrehozza a főablakot
+     * @param title főablak kívánt címe
+     */
     public MainFrame(String title) {
         super(title);
 
@@ -63,6 +69,9 @@ public class MainFrame extends JFrame {
 
     }
 
+    /***
+     * frissíti a főablakot
+     */
     public void refresh(){
         remove(deckList);
         setDeckList();
@@ -73,6 +82,9 @@ public class MainFrame extends JFrame {
         }
     }
 
+    /***
+     * létrehoz egy új Decket és frissíti a főablakot
+     */
     class newDeckButtonActionListener implements ActionListener {
 
         public newDeckButtonActionListener(){};
@@ -89,16 +101,31 @@ public class MainFrame extends JFrame {
 
     }
 
+    /***
+     * Visszaadja a MainFramet
+     * @return this
+     */
     private MainFrame getThis(){return this;}
 
+    /***
+     * törli a Frame által megnyitott DeckFrame-ek listájából az DeckFrame-t
+     * @param df törlendő DeckFrame
+     */
     public void removeDeckFrame(DeckFrame df){
         deckFrames.remove(df);
     }
 
+    /***
+     * Megynyitja a DeckFrame ablakot szerkesztéshez
+     */
     class editDeckButtonActionListener implements ActionListener {
 
         private Deck d;
 
+        /***
+         *
+         * @param d melyik Deck-et szeretnénk szerkeszteni
+         */
         public editDeckButtonActionListener(Deck d){this.d=d;};
 
         public void actionPerformed(ActionEvent ae){
@@ -112,30 +139,18 @@ public class MainFrame extends JFrame {
 
     }
 
-//    class proFuncButtonActionListener implements ActionListener {
-//
-//
-//
-//        public proFuncButtonActionListener(){};
-//
-//        public void actionPerformed(ActionEvent ae){
-//            if (ae.getActionCommand().equals("proFunc")) {
-//                URL url=getClass().getResource("/rsc/profunc.dat");
-//                ImageFrame imf=new ImageFrame(new File("profunc.dat"));
-//                imf.setVisible(true);
-//
-//
-//            }
-//        }
-//
-//    }
 
-
-
+    /***
+     * megnyitja a LearnFrame ablakot
+     */
     class learnDeckButtonActionListener implements ActionListener {
 
         private Deck d;
 
+        /***
+         *
+         * @param d melyik Decket szeretnénk tanulni
+         */
         public learnDeckButtonActionListener(Deck d){this.d=d;};
 
         public void actionPerformed(ActionEvent ae){
@@ -149,7 +164,9 @@ public class MainFrame extends JFrame {
     }
 
 
-
+    /***
+     * generálja a Deck listát
+     */
     private void setDeckList(){
         deckList = new JPanel();
         deckList.setLayout(new BoxLayout(deckList, BoxLayout.Y_AXIS));

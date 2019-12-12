@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
+/***
+ * Szerkeszteni lehet meglévő Card-ot és újat létrehozni
+ */
 public class EditCardFrame extends JFrame{
     private Card card;
     private Flashcard flashcard;
@@ -28,8 +31,15 @@ public class EditCardFrame extends JFrame{
     private JButton save;
     private JPanel commands;
 
+    /***
+     * Visszaadja ezt  a Frame-et
+     * @return this
+     */
     private EditCardFrame getThis(){return this;}
 
+    /***
+     * cancel eseményre kilép az Frameből, az el nem mentett változások mentése nélkül
+     */
     class cancelCardButtonActionListener implements ActionListener{
         public cancelCardButtonActionListener(){};
 
@@ -41,6 +51,9 @@ public class EditCardFrame extends JFrame{
         }
     }
 
+    /***
+     * deleteCard eseményre törli az aktuális kártyát és kilép a Frameből
+     */
     class deleteCardButtonActionListener implements ActionListener{
         public deleteCardButtonActionListener(){};
 
@@ -59,6 +72,9 @@ public class EditCardFrame extends JFrame{
         }
     }
 
+    /***
+     * saveCard eseményre menti a kértya változásait és értesíti a szülő Frame-et
+     */
     class saveCardButtonActionListener implements ActionListener {
         public saveCardButtonActionListener(){};
         public void actionPerformed(ActionEvent ae){
@@ -97,7 +113,14 @@ public class EditCardFrame extends JFrame{
     }
 
 
-
+    /***
+     * Létrehozza a Frame-et
+     * @param card A Card, amit szerkesztünk
+     * @param flashcard A kezelő program objektum
+     * @param isNew true, ha új kártyát hozunk létre
+     * @param sourceDeck szerkesztéskor  a kártyát kezelő Deck, újnál null
+     * @param deckFrame ahonnan megnyitjuk ezt a Frame-et
+     */
     EditCardFrame(Card card, Flashcard flashcard, Boolean isNew, Deck sourceDeck, DeckFrame deckFrame){
         super("Edit card");
         this.setMinimumSize(new Dimension(400,100));

@@ -14,6 +14,9 @@ import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Set;
 
+/***
+ * Ezen lehet megjeleníteni a challengeket, a válaszokat, önmagunkat értékelni
+ */
 public class LearnFrame extends JFrame implements KeyListener{
     private Deck deck;
     private MainFrame mainFrame;
@@ -33,6 +36,9 @@ public class LearnFrame extends JFrame implements KeyListener{
 
     private JPanel buttons;
 
+    /***
+     * showAnswer eseményre megjeleníti a Challenge-ben tárolt response-okat
+     */
     class showAnswerButtonActionListener implements ActionListener {
         public showAnswerButtonActionListener(){};
         public void actionPerformed(ActionEvent ae){
@@ -43,6 +49,10 @@ public class LearnFrame extends JFrame implements KeyListener{
         }
     }
 
+    /***
+     * értékeljük az aktuális Challengre az eredményünket, legeneráltatja a következő challenget
+     * @param grade 0-5 értékelés
+     */
     private void gradeChallenge(int grade){
         deck.learn(deck.getFirstChallenge(), grade);
         mainFrame.refresh();
@@ -51,8 +61,16 @@ public class LearnFrame extends JFrame implements KeyListener{
         generateChallenges();
     }
 
+    /***
+     * gradeButton eseményre meghívja a gradeChallenge(int) függvényt
+     */
     class gradeButtonActionListener implements ActionListener {
         private int grade;
+
+        /***
+         * Létrehozza az actionlistenert
+         * @param grade 0-5 értékelés
+         */
         public gradeButtonActionListener(int grade){this.grade=grade;};
         public void actionPerformed(ActionEvent ae){
             if (ae.getActionCommand().equals("grade")) {
@@ -69,10 +87,13 @@ public class LearnFrame extends JFrame implements KeyListener{
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        System.err.println("pressed: "+ keyEvent);
+
     }
 
     @Override
+    /***
+     * space vagy numpad 2-5 felengedésére meghívja  a kapcsolódó függvényeket
+     */
     public void keyReleased(KeyEvent keyEvent) {
         int key =keyEvent.getKeyCode();
         System.err.println(key);
@@ -96,6 +117,9 @@ public class LearnFrame extends JFrame implements KeyListener{
         }
     }
 
+    /***
+     * generálja  a következő challenge GUI-ját, aktiválja a szükséges gombokat
+     */
     private void generateChallenges(){
         Challenge challenge=deck.getFirstChallenge();
         Set<Side> challengeSet=challenge.getChallenge();
@@ -106,6 +130,9 @@ public class LearnFrame extends JFrame implements KeyListener{
         showAnswer.setEnabled(true);
     }
 
+    /***
+     * generálja a válaszokat a GUI-ban
+     */
     private void generateResponses(){
         Challenge challenge=deck.getFirstChallenge();
         Set<Side> responseSet=challenge.getResponse();
@@ -116,6 +143,11 @@ public class LearnFrame extends JFrame implements KeyListener{
         showAnswer.setEnabled(false);
     }
 
+    /***
+     * Létrehozza a frame-et
+     * @param deck melyik Deckből tanulunk
+     * @param mainFrame a MainFrame, amiből megnyitottuk az ablakot
+     */
     public LearnFrame(Deck deck, MainFrame mainFrame){
         super("Learning: "+ deck.getName());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);

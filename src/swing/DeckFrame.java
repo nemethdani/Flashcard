@@ -13,6 +13,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
+/***
+ * Ez jeleníti meg a Deck adatait, Card-jait, itt lehet a Decket szerkeszteni
+ */
 public class DeckFrame extends JFrame {
     private JTextField deckName;
     private JTable decksTable;
@@ -26,13 +29,23 @@ public class DeckFrame extends JFrame {
     private MainFrame main;
     private Flashcard fc;
 
+    /***
+     * Frissíti a Frame-et
+     */
     public void refresh(){
         decksTable.revalidate();
         decksTable.repaint();
     }
 
+    /***
+     * Visszadja a Frame-et (belső osztályok miatt)
+     * @return this
+     */
     private DeckFrame getThis(){return this;}
 
+    /***
+     * Új kártya eseményre megnyitja az EditCardFrame-et új kártya módban
+     */
     class newCardButtonActionListener implements ActionListener {
         public newCardButtonActionListener(){};
         public void actionPerformed(ActionEvent ae){
@@ -43,6 +56,9 @@ public class DeckFrame extends JFrame {
         }
     }
 
+    /***
+     * editCard eseményre megnyitja az EditCardFrame-et edit módban, a kijelölt Card szerkesztésére
+     */
     class editCardButtonActionListener implements ActionListener {
         public editCardButtonActionListener(){};
         public void actionPerformed(ActionEvent ae){
@@ -58,6 +74,9 @@ public class DeckFrame extends JFrame {
         }
     }
 
+    /***
+     * deleteCard eseményre törli a kiejlölt kártyát
+     */
     class deleteCardButtonActionListener implements ActionListener {
         public deleteCardButtonActionListener(){};
         public void actionPerformed(ActionEvent ae){
@@ -73,6 +92,13 @@ public class DeckFrame extends JFrame {
         }
     }
 
+    /***
+     * Létrehozza a DeckFrame-et
+     * @param title A Frame címe
+     * @param data A kezelt Deck
+     * @param fc A kezelő Flashcard osztály
+     * @param main A MainFrame, ahonnan megnyitották
+     */
     public DeckFrame(String title, Deck data, Flashcard fc,  MainFrame main){
         super(title);
         this.main=main;
