@@ -8,13 +8,18 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+/***
+ * Tárolja a Card-okat, bővíti az AbstractTableModel-t táblázatos kiíráshoz
+ */
 public class Deck extends AbstractTableModel implements Serializable, Comparable {
     private List<Card> cardlist;
     private String name;
     private boolean ordered;
     private int numberOfSides=2;
 
-
+    /***
+     * Újra növekvő sorrendbe rendezi a Card-okat, ha !ordered
+     */
     private void orderIfNecessary(){
         if(!ordered){
             Collections.sort(cardlist);
@@ -22,14 +27,32 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
         }
     }
 
+    /***
+     * Létrehoz egy üres Deck-et, paraméterben megadott névvel
+     * @param name A Deck kívánt neve
+     */
     public Deck(String name){
         cardlist=new ArrayList<Card>();
         this.name=name;
         ordered=true;
     }
 
+    /***
+     * Visszadja a Deck nevét
+     * @return Deck neve
+     */
     public String getName(){return name;}
+
+    /***
+     * Beállítja a Deck nevét
+     * @param newname a Deck új neve
+     */
     public void setName(String newname){this.name=newname;}
+
+    /***
+     * Hány kártyát kell ismételni a Deckből
+     * @return Hány kártyát kell ismételni a Deckből
+     */
     public int getNumberOfDue(){
         orderIfNecessary();
         Iterator it=cardlist.iterator();
@@ -43,7 +66,15 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
         }
         return count;
     }
-    // tanulhatunk tovább is ha akarunk, nem csak a due elemeket
+
+    /***
+     * Visszaadja a következő challenget:
+     * Ha van Due, akkor azokból a legkorábbit
+     * Ha nincs Due és van még nem látott Card, akkor a nemlátottakból az utolsó Card utolsó Challengét (új tanulás)
+     * Egyébként a legkorábbi kártyát (korai ismétlés)
+     * @return következő Challenge
+     * @throws IndexOutOfBoundsException Ha üres a Deck
+     */
     public Challenge getFirstChallenge() throws IndexOutOfBoundsException{
         if(cardlist.size()>0){
             orderIfNecessary();
@@ -66,6 +97,12 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
         }
         else throw new IndexOutOfBoundsException("deck üres");
     }
+
+    /***
+     * Frissíti a megadott challenge ismétlési idejét grade szerint
+     * @param c Az ismételt Challenge
+     * @param grade 0-5 értékelés
+     */
     public void learn(Challenge c, int grade){
         try {
             c.updateRepetitionTime(grade);
@@ -74,14 +111,29 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
             e.printStackTrace();
         }
     }
+
+    /***
+     * Kártyát ad a Deck-hez
+     * @param c A Deck-hez adandó kártya
+     */
     public void addCard(Card c){
         cardlist.add(c);
 
     }
+
+    /***
+     * Kitöröl egy kártyát a Deckből
+     * @param c A törlendő kártyaa
+     */
     public void deleteCard(Card c){
         cardlist.remove(c);
     }
 
+    /***
+     * Serializálja a Deck-et
+     * @param parent A célmappa
+     * @throws IOException
+     */
     public void serialize(File parent) throws IOException {
         File f=new File(parent, name);
         FileOutputStream fos=new FileOutputStream(f);
@@ -90,26 +142,43 @@ public class Deck extends AbstractTableModel implements Serializable, Comparable
         ous.close();
     }
 
+    /***
+     * Visszaadja az i-edik sorhoz tartozó Card-ot
+     * @param i A sor indexe
+     * @return Az i-edik Card
+     */
     public Card getCardByRow(int i){return cardlist.get(i);}
 
 
 
     @Override
+    /***
+     * ABC rend szerint hasonlítja a Deck-eket
+     */
     public int compareTo(Object d) {
         return name.compareTo(((Deck) d).name);
     }
 
     @Override
+    /***
+     * Hány Card van a deckben
+     */
     public int getRowCount() {
         return cardlist.size();
     }
 
     @Override
+    /***
+     * Hány oszlopa legyen a táblázatnak: A Card-ok Sidejeai +1
+     */
     public int getColumnCount() {
         return numberOfSides+1;
     }
 
     @Override
+    /***
+     * A Side oszlopokban a Side szövege, a harmadikban a Card első Challengének ismétlési ideje
+     */
     public Object getValueAt(int i, int i1) {
         if(i1>=2){
             return cardlist.get(i).getFirstChallenge().getRepetitionTime();

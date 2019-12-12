@@ -9,10 +9,16 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.Vector;
 
+/***
+ * Backend osztály, betölti, tárolja, kezeli és lementi a Deckeket
+ */
 public class Flashcard {
     private Set<Deck> decks;
     private File programDir;
 
+    /***
+     * Beállítja deckeket tartalmazó mappát a "user.dir"/flashcard_data mappára, ha nincs létrehozza
+     */
     public Flashcard(){
         decks=new TreeSet<Deck>();
         String homestring=System.getProperty("user.home");
@@ -22,11 +28,24 @@ public class Flashcard {
         programDir.mkdir();
     }
 
+    /***
+     * Hozzáad a programhoz egy Deck-et
+     * @param d a hozzáadandó Deck
+     */
     public void addDeck(Deck d){decks.add(d);}
 
+    /***
+     * Visszaadja az összes Decket
+     * @return összes Deck-ek Set-je
+     */
     public Set<Deck> getDecks() {
         return decks;
     }
+
+    /***
+     * Visszaadja az összes Deck nevét
+     * @return Összes deck neve
+     */
     public Vector<String> getDeckNames(){
         Vector<String> decknames=new Vector<String>();
         for(Deck d:decks){
@@ -40,6 +59,9 @@ public class Flashcard {
         return ((TreeSet<Deck>)decks).floor(new Deck(deckName));
     }
 
+    /***
+     * Betölti az összes fájlt Deck-ként  a programDir-ből
+     */
     public void loadDecks()  {
 
         File[] deckFiles=programDir.listFiles();
@@ -62,6 +84,9 @@ public class Flashcard {
 
     }
 
+    /***
+     * Kitörli a programDir-ben levő összes fájlt, majd ide menti az ÖSszzes Ramban levő Deck-et
+     */
     public void saveDecks() {
         File[] deckFiles=programDir.listFiles();
         for(File df:deckFiles){
